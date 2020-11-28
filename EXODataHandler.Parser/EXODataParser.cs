@@ -20,11 +20,7 @@ namespace EXODataHandler.Parser
                 // With C# 8.0 we don't need the braces
                 using StreamReader sr = File.OpenText(path);
 
-                string line = sr.ReadLine().Trim();
-
-                EXODataStructure structure = EXODataStructure.Parse(line);
-
-                data = new EXODataSet(structure);
+                string line = null;
 
                 for (line = sr.ReadLine(); line != null; line = sr.ReadLine())
                 {
@@ -32,6 +28,12 @@ namespace EXODataHandler.Parser
 
                     if (line.StartsWith('#') || string.IsNullOrEmpty(line))
                         continue;
+                    else if (data == null)
+                    {
+                        EXODataStructure structure = EXODataStructure.Parse(line);
+
+                        data = new EXODataSet(structure);
+                    }
 
                     data.AddPlanet(line);
                 }

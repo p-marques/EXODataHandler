@@ -1,5 +1,6 @@
 ﻿using EXODataHandler.Core;
 using System.Collections.Generic;
+using EXODataHandler.Parser.Entities;
 
 namespace EXODataHandler.Parser.Helpers
 {
@@ -17,5 +18,17 @@ namespace EXODataHandler.Parser.Helpers
 
             return null;
         }
+
+        internal static bool ContainsHeaderName(this IList<EXODataHeader> headerList, string name)
+        {
+            for (int i = 0; i < headerList.Count; i++)
+            {
+                if (headerList[i].Id == name) return true;
+            }
+
+            return false;
+        }
+
+        
     }
 }

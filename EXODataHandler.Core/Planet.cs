@@ -8,9 +8,7 @@ namespace EXODataHandler.Core
 
         public Planet(Star host, string name) : base(name)
         {
-            Host = host;
-
-            dataFields = new LinkedList<IDataField>();
+            Host = host; 
         }
     }
 }

@@ -8,6 +8,13 @@
 
         object IDataField.Data => Value;
 
+        public DataField(string id, T value)
+        {
+            Id = id;
+            Value = value;
+        }
+
         public override string ToString() => Value.ToString();
+
     }
 }

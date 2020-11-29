@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "EXODataHandler.Console": {
+      "commandName": "Project",
+      "commandLineArgs": "NasaData.csv"
+    }
+  }
+}

@@ -22,21 +22,18 @@ namespace EXODataHandler.Parser
 
                 string line = null;
 
-                while (string.IsNullOrEmpty(line) || line.StartsWith('#'))
-                {
-                    line = sr.ReadLine().Trim();
-                }
-
-                EXODataStructure structure = EXODataStructure.Parse(line);
-
-                data = new EXODataSet(structure);
-
                 for (line = sr.ReadLine(); line != null; line = sr.ReadLine())
                 {
                     line = line.Trim();
 
                     if (line.StartsWith('#') || string.IsNullOrEmpty(line))
                         continue;
+                    else if (data == null)
+                    {
+                        EXODataStructure structure = EXODataStructure.Parse(line);
+
+                        data = new EXODataSet(structure);
+                    }
 
                     data.AddPlanet(line);
                 }

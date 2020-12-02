@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 
 // This class is responsible for placing all the rows and columns of info
-public class UIDataInstanciator : MonoBehaviour
+public class UIDataInstantiator : MonoBehaviour
 {
     private int totalRows;
     // maxChildren will have to be set according to the amount of paramaters given by the file
@@ -22,9 +22,9 @@ public class UIDataInstanciator : MonoBehaviour
     {
         maxChildren = 8;
         totalRows = 20;
-        GenerateData();
+        LoadData();
     }
-    public void GenerateData() //should receive max rows and columns
+    public void LoadData() //should receive max rows and columns
     {
         for (int i = 0; i < totalRows; i++)
         {

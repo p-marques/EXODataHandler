@@ -33,6 +33,7 @@ namespace EXODataHandler.Parser
                         EXODataStructure structure = EXODataStructure.Parse(line);
 
                         data = new EXODataSet(structure);
+                        continue;
                     }
 
                     data.AddPlanet(line);

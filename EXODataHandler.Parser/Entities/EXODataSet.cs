@@ -14,6 +14,8 @@ namespace EXODataHandler.Parser.Entities
 
         public EXODataStructure DataStructure { get; }
 
+        public EXODataHeader header { get; }
+
         public EXODataSet(EXODataStructure structure)
         {
             Planets = new LinkedList<Planet>();
@@ -54,119 +56,65 @@ namespace EXODataHandler.Parser.Entities
 
         private void HandleDataFields(Planet planet, string[] values)
         {
-            for (int i = 0; i < values.Length; i++)
-            {
                 for (int k = 0; k < DataStructure.Headers.Count; k++)
                 {
-                    if (DataStructure.Headers[k].PositionIndex == i)
-                    {
-                        if(!string.IsNullOrWhiteSpace(values[i]))
-                            AddDataField(planet, DataStructure.Headers[k].Id, values[i]);
-                    }
+                    SetDataField(DataStructure.Headers[k], planet, values);
                 }
-            }
         }
 
         private void SetDataField(EXODataHeader header,Planet planet, string[] values)
         {
-            string value = values[header.PositionIndex];           
+            string value = values[header.PositionIndex].Trim();
+            if (string.IsNullOrEmpty(value))
+                return;
             switch (header.Id)
             {
                 case Constants.DiscoveryMethod:
                     planet.DiscoveryMethod = value;
                     break;
                 case Constants.DiscoveryYear: 
-                        planet.DiscoveryYear = int.Parse(value);
+                        planet.DiscoveryYear = short.Parse(value, 
+                                NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.OrbitalPeriod:
-                        planet.OrbitalPeriod = float.Parse(value);
+                        planet.OrbitalPeriod = float.Parse(value, 
+                                NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.EquilibriumTemperature:
-                        planet.EquilibriumTemperature = float.Parse(value);
+                        planet.EquilibriumTemperature = float.Parse(value, 
+                                NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarEffectiveTemperature:
-                        planet.Host.StellarEffectiveTemperature = float.Parse(value);
+                        planet.Host.StellarEffectiveTemperature = float.Parse(value, 
+                                NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarRadius:
-                        planet.Host.StellarRadius = float.Parse(value);
+                        planet.Host.StellarRadius = float.Parse(value, 
+                                NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarMass:
-                        planet.Host.StellarMass = float.Parse(value);
+                        planet.Host.StellarMass = float.Parse(value, 
+                                NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarAge:
-                        planet.Host.StellarAge = float.Parse(value);
+                        planet.Host.StellarAge = float.Parse(value, 
+                                NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarRotationSpeed:
-                        planet.Host.StellarRotationSpeed = float.Parse(value);
+                        planet.Host.StellarRotationSpeed = float.Parse(value,
+                                NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarRotationPeriod:
-                        planet.Host.StellarRotationPeriod = float.Parse(value);
+                        planet.Host.StellarRotationPeriod = float.Parse(value, 
+                                NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.SunDistance:
-                        planet.Host.SunDistance = float.Parse(value);
+                        planet.Host.SunDistance = float.Parse(value, 
+                                NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
 
             }
         }
-
-        //funcao para ver se field pertence a estrela ou planeta
-        private void AddDataField(Planet planet, string id, string value)
-        {
-            if (id.StartsWith("s"))
-            {
-                planet.Host.AddDataField(GetDataField(id, value));
-            }
-            else
-                planet.AddDataField(GetDataField(id, value));
-
-        }
-
-        private IDataField GetDataField(string id, string value)
-        {
-            ValueTypeEnum valueType = FindValueType(id);
-
-            if (valueType == ValueTypeEnum.ValueTypeString)
-            {
-                return new DataField<string>(id, value);
-            }
-            else if (valueType == ValueTypeEnum.ValueTypeInt)
-            {
-                if (short.TryParse(value, out short shortValue))
-                    return new DataField<short>(id, shortValue);
-                else
-                    throw new Exception("Year Data Field should be short.");
-            }
-            else if (float.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out float floatValue))
-            {
-                return new DataField<float>(id, floatValue);
-            }
-            else if (double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out double doubleValue))
-            {
-                return new DataField<double>(id, doubleValue);
-            }
-
-            throw new Exception("Data Field unknown type.");
-        }
-
-        private ValueTypeEnum FindValueType(string id)
-        {
-            ValueTypeEnum finalType = ValueTypeEnum.ValueTypeFloat;
-            
-            switch (id)
-            {
-                case "pl_name":
-                case "hostname":
-                case "discoverymethod":
-                    finalType = ValueTypeEnum.ValueTypeString;
-                    break;
-                case "disc_year":
-                    finalType = ValueTypeEnum.ValueTypeInt;
-                    break;
-            }
-
-            return finalType;
-        }
-
 
     }
 }

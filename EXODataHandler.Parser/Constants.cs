@@ -17,12 +17,12 @@
         public const string StellarRotationSpeed = "st_vsin";
         public const string StellarRotationPeriod = "st_rotp";
         public const string SunDistance = "sy_dist";
-        public const string RelevantHeaders = "pl_name, hostname," +
-                                              "discoverymethod, disc_year," +
-                                              "pl_orbper, pl_rade, pl_masse," +
-                                              "pl_eqt, st_teff, st_rad," +
-                                              "st_mass, st_age, st_vsin," +
-                                              "st_rotp, sy_dist";
+        public const string RelevantHeaders = "pl_name,hostname," +
+                                              "discoverymethod,disc_year," +
+                                              "pl_orbper,pl_rade,pl_masse," +
+                                              "pl_eqt,st_teff,st_rad," +
+                                              "st_mass,st_age,st_vsin," +
+                                              "st_rotp,sy_dist";
 
 
     }

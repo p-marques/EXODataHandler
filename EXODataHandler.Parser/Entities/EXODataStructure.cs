@@ -30,7 +30,7 @@ namespace EXODataHandler.Parser.Entities
                 if (string.IsNullOrEmpty(header.Id))
                     throw new Exception("Invalid column header.");
 
-                Console.WriteLine($"Relevant: {relevantHeaders[i]} Header ID: {header.Id}");
+                
                 if (relevantHeaders.Contains(header.Id))
                 {
                     if (headers.Contains(header))

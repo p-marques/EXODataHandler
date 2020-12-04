@@ -67,6 +67,48 @@ namespace EXODataHandler.Parser.Entities
             }
         }
 
+        private void SetDataField(EXODataHeader header,Planet planet, string[] values)
+        {
+            string value = values[header.PositionIndex];           
+            switch (header.Id)
+            {
+                case Constants.DiscoveryMethod:
+                    planet.DiscoveryMethod = value;
+                    break;
+                case Constants.DiscoveryYear: 
+                        planet.DiscoveryYear = int.Parse(value);
+                    break;
+                case Constants.OrbitalPeriod:
+                        planet.OrbitalPeriod = float.Parse(value);
+                    break;
+                case Constants.EquilibriumTemperature:
+                        planet.EquilibriumTemperature = float.Parse(value);
+                    break;
+                case Constants.StellarEffectiveTemperature:
+                        planet.Host.StellarEffectiveTemperature = float.Parse(value);
+                    break;
+                case Constants.StellarRadius:
+                        planet.Host.StellarRadius = float.Parse(value);
+                    break;
+                case Constants.StellarMass:
+                        planet.Host.StellarMass = float.Parse(value);
+                    break;
+                case Constants.StellarAge:
+                        planet.Host.StellarAge = float.Parse(value);
+                    break;
+                case Constants.StellarRotationSpeed:
+                        planet.Host.StellarRotationSpeed = float.Parse(value);
+                    break;
+                case Constants.StellarRotationPeriod:
+                        planet.Host.StellarRotationPeriod = float.Parse(value);
+                    break;
+                case Constants.SunDistance:
+                        planet.Host.SunDistance = float.Parse(value);
+                    break;
+
+            }
+        }
+
         //funcao para ver se field pertence a estrela ou planeta
         private void AddDataField(Planet planet, string id, string value)
         {

@@ -28,7 +28,6 @@ namespace EXODataHandler.Parser.Helpers
 
             return false;
         }
-
-        
+    
     }
 }

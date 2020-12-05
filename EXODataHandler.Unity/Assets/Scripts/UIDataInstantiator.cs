@@ -16,7 +16,9 @@ public class UIDataInstantiator : MonoBehaviour
     private float headerWidth;
 
     [SerializeField]
-    private GameObject rowPrefab, textPrefab, headerPrefab, headerspot;
+    private GameObject textPrefab, headerPrefab, headerspot, dataZone;
+    [SerializeField]
+    private Header Header;
 
     private  TextMeshProUGUI textComponent;
 
@@ -24,9 +26,9 @@ public class UIDataInstantiator : MonoBehaviour
     //Column.width = longest object in column. (THIS INFORMATION MUST COME FROM DATACORE
     private void Start()
     {
-        maxChildren = 4000;
+        maxChildren = 50;
         totalRows = 8;
-        SpawnHeaders(maxChildren);
+        SpawnHeaders(totalRows);
     } 
     private void SpawnHeaders(int totalRows)
     {
@@ -36,39 +38,50 @@ public class UIDataInstantiator : MonoBehaviour
             headerTransform = headerPrefab.GetComponent<RectTransform>();
             headerWidth = headerTransform.sizeDelta.x + 15;
 
-            GameObject header = Instantiate(headerPrefab, 
+            GameObject _header = Instantiate(headerPrefab, 
                 new Vector3(headerspot.transform.position.x + headerWidth * i,
                 headerspot.transform.position.y, headerspot.transform.position.z), Quaternion.identity);
-            header.transform.SetParent(headerspot.transform);
+            _header.transform.SetParent(headerspot.transform);
+
             //THIS CANT BE HERE FIND A FIX vvvvvv
             scalechange = new Vector3(2, 2, 0);
-            header.transform.localScale -= scalechange;
+            _header.transform.localScale -= scalechange;
             //----------------------------------
 
-            GameObject child = header.transform.GetChild(0).gameObject;
+            GameObject child = _header.transform.GetChild(0).gameObject;
             textComponent = child.GetComponent<TextMeshProUGUI>();
             textComponent.text = "Nice"; //Name of parameter here
 
         }
         for (int i = 0; i < totalRows; i++)
         {
-            MakeDataAppearOnHeader(headerspot);
+            GameObject _header = headerspot.transform.GetChild(i).gameObject;
+            GameObject dataZoneSpawner = _header.transform.GetChild(4).gameObject;
+            GameObject _dataZone = Instantiate(dataZone, new Vector3(dataZoneSpawner.transform.position.x, //this child is 
+                dataZoneSpawner.transform.position.y, dataZoneSpawner.transform.position.z), Quaternion.identity);
+            _dataZone.transform.SetParent(gameObject.transform);
+            MakeDataAppearOnHeader(_dataZone);
         }
     }
-    private void MakeDataAppearOnHeader(GameObject headerspot)
+    private void MakeDataAppearOnHeader(GameObject _dataZoneToFill)
     {
         for (int i = 0; i < maxChildren; i++)
         {
-            GameObject headerToFill = headerspot.transform.GetChild(i).gameObject; //this gets the header from header spawner
-            GameObject DataZone = headerToFill.transform.GetChild(4).gameObject;
-            GameObject textchild = Instantiate(textPrefab, new Vector3(DataZone.transform.position.x, //this child is 
-                DataZone.transform.position.y, DataZone.transform.position.z), Quaternion.identity); //meant to be instantiated inside the data zone of headerTofill
-            textchild.transform.SetParent(DataZone.transform);
+            //checking trying to find more headers than there are
+            GameObject _textchild = Instantiate(textPrefab, new Vector3(_dataZoneToFill.transform.position.x, //this child is 
+                _dataZoneToFill.transform.position.y, _dataZoneToFill.transform.position.z), Quaternion.identity); //meant to be instantiated inside the data zone of headerTofill
+            _textchild.transform.SetParent(_dataZoneToFill.transform);
 
             //write in each text
-            textComponent = textchild.GetComponent<TextMeshProUGUI>();
+            textComponent = _textchild.GetComponent<TextMeshProUGUI>();
             textComponent.text = $"{i}"; //Data goes here
         }
     }
+
+    //Another problem arises
+    //Headers must be parented on DataUI_vertical
+    //DataZones must be Content yet somehow linked to each header
+    //When DataZones are generated they get a property that links them to the Headers
+    //
 }
 

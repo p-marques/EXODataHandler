@@ -35,7 +35,7 @@ namespace EXODataHandler.API
 
             stars = data.Stars.ToList();
 
-            result = new EXODataSet(new List<Planet>(planets),
+            result = new EXODataSet(data.DataStructure, new List<Planet>(planets),
                 new List<Star>(stars));
 
             return new APIResponse<EXODataSet>(parserResponse, result);

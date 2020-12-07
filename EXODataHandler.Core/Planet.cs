@@ -4,8 +4,8 @@
     {
         public string DiscoveryMethod { get; set; }
         public short? DiscoveryYear { get; set; }
-        public float? PlanetRadius { get; set; }
-        public float? PlanetMass { get; set; }
+        public float? Radius { get; set; }
+        public float? Mass { get; set; }
         public float? OrbitalPeriod { get; set; }
         public float? EquilibriumTemperature { get; set; }
 

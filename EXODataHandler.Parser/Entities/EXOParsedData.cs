@@ -85,27 +85,27 @@ namespace EXODataHandler.Parser.Entities
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarEffectiveTemperature:
-                        planet.Host.StellarEffectiveTemperature = float.Parse(value, 
+                        planet.Host.EffectiveTemperature = float.Parse(value, 
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarRadius:
-                        planet.Host.StellarRadius = float.Parse(value, 
+                        planet.Host.Radius = float.Parse(value, 
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarMass:
-                        planet.Host.StellarMass = float.Parse(value, 
+                        planet.Host.Mass = float.Parse(value, 
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarAge:
-                        planet.Host.StellarAge = float.Parse(value, 
+                        planet.Host.Age = float.Parse(value, 
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarRotationSpeed:
-                        planet.Host.StellarRotationSpeed = float.Parse(value,
+                        planet.Host.RotationSpeed = float.Parse(value,
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarRotationPeriod:
-                        planet.Host.StellarRotationPeriod = float.Parse(value, 
+                        planet.Host.RotationPeriod = float.Parse(value, 
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.SunDistance:

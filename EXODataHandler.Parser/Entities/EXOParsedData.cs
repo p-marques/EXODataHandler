@@ -73,43 +73,51 @@ namespace EXODataHandler.Parser.Entities
                     planet.DiscoveryMethod = value;
                     break;
                 case Constants.DiscoveryYear: 
-                        planet.DiscoveryYear = short.Parse(value, 
+                    planet.DiscoveryYear = short.Parse(value, 
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.OrbitalPeriod:
-                        planet.OrbitalPeriod = float.Parse(value, 
+                    planet.OrbitalPeriod = float.Parse(value, 
+                                NumberStyles.Any, CultureInfo.InvariantCulture);
+                    break;
+                case Constants.PlanetRadius:
+                    planet.Radius = float.Parse(value,
+                                NumberStyles.Any, CultureInfo.InvariantCulture);
+                    break;
+                case Constants.PlanetMass:
+                    planet.Mass = float.Parse(value,
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.EquilibriumTemperature:
-                        planet.EquilibriumTemperature = float.Parse(value, 
+                    planet.EquilibriumTemperature = float.Parse(value, 
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarEffectiveTemperature:
-                        planet.Host.EffectiveTemperature = float.Parse(value, 
+                    planet.Host.EffectiveTemperature = float.Parse(value, 
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarRadius:
-                        planet.Host.Radius = float.Parse(value, 
+                    planet.Host.Radius = float.Parse(value, 
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarMass:
-                        planet.Host.Mass = float.Parse(value, 
+                    planet.Host.Mass = float.Parse(value, 
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarAge:
-                        planet.Host.Age = float.Parse(value, 
+                    planet.Host.Age = float.Parse(value, 
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarRotationSpeed:
-                        planet.Host.RotationSpeed = float.Parse(value,
+                    planet.Host.RotationSpeed = float.Parse(value,
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarRotationPeriod:
-                        planet.Host.RotationPeriod = float.Parse(value, 
+                    planet.Host.RotationPeriod = float.Parse(value, 
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.SunDistance:
-                        planet.Host.SunDistance = float.Parse(value, 
+                    planet.Host.SunDistance = float.Parse(value, 
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
 

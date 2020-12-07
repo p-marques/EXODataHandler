@@ -1,4 +1,5 @@
-﻿using EXODataHandler.Parser.Entities;
+﻿using EXODataHandler.Core;
+using EXODataHandler.Parser.Entities;
 using System;
 using System.IO;
 
@@ -6,13 +7,14 @@ namespace EXODataHandler.Parser
 {
     public class EXODataParser : IEXODataParser
     {
-        public EXODataParserResult TryParse(string fileName, out EXODataSet data)
+        public APIResponse TryParse(string fileName, out EXODataSet data)
         {
             data = null;
 
             try
             {
-                string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
+                string path = Path.Combine(Environment
+                    .GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
 
                 if (!path.EndsWith(".csv"))
                     throw new Exception("Wrong file format.\nExpecting .csv");
@@ -33,6 +35,7 @@ namespace EXODataHandler.Parser
                         EXODataStructure structure = EXODataStructure.Parse(line);
 
                         data = new EXODataSet(structure);
+
                         continue;
                     }
 
@@ -41,18 +44,18 @@ namespace EXODataHandler.Parser
             }
             catch (FileNotFoundException)
             {
-                return new EXODataParserResult(false, "No file found.");
+                return new APIResponse(false, "No file found.");
             }
             catch (DirectoryNotFoundException)
             {
-                return new EXODataParserResult(false, "Directory not found.");
+                return new APIResponse(false, "Directory not found.");
             }
             catch (Exception e)
             {
-                return new EXODataParserResult(false, e.Message);
+                return new APIResponse(false, e.Message);
             }
 
-            return new EXODataParserResult(true);
+            return new APIResponse(true);
         }
     }
 }

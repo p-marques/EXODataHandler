@@ -23,7 +23,5 @@
                                               "pl_eqt,st_teff,st_rad," +
                                               "st_mass,st_age,st_vsin," +
                                               "st_rotp,sy_dist";
-
-
     }
 }

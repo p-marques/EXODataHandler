@@ -14,8 +14,6 @@ namespace EXODataHandler.Parser.Entities
 
         public EXODataStructure DataStructure { get; }
 
-        public EXODataHeader header { get; }
-
         public EXODataSet(EXODataStructure structure)
         {
             Planets = new LinkedList<Planet>();
@@ -56,17 +54,19 @@ namespace EXODataHandler.Parser.Entities
 
         private void HandleDataFields(Planet planet, string[] values)
         {
-                for (int k = 0; k < DataStructure.Headers.Count; k++)
-                {
-                    SetDataField(DataStructure.Headers[k], planet, values);
-                }
+            for (int k = 0; k < DataStructure.Headers.Count; k++)
+            {
+                SetDataField(DataStructure.Headers[k], planet, values);
+            }
         }
 
         private void SetDataField(EXODataHeader header,Planet planet, string[] values)
         {
             string value = values[header.PositionIndex].Trim();
+
             if (string.IsNullOrEmpty(value))
                 return;
+
             switch (header.Id)
             {
                 case Constants.DiscoveryMethod:

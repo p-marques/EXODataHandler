@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EXODataHandler.Parser.Entities
+﻿namespace EXODataHandler.Parser.Entities
 {
     public struct EXODataHeader
     {

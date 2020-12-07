@@ -21,7 +21,8 @@ namespace EXODataHandler.Parser.Entities
 
             string[] headersInFile = headersLine.Split(',');
 
-            List<string> relevantHeaders = new List<string>(Constants.RelevantHeaders.Split(','));
+            List<string> relevantHeaders = 
+                new List<string>(Constants.RelevantHeaders.Split(','));
 
             for (short i = 0; i < headersInFile.Length; i++)
             {
@@ -46,6 +47,7 @@ namespace EXODataHandler.Parser.Entities
 
             return new EXODataStructure(headers.ToArray());
         }
+
         public int FindHeaderIndex(string headerToFind)
         {
             for (int i = 0; i < headers.Length; i++)

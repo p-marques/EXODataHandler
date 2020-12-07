@@ -5,6 +5,6 @@ namespace EXODataHandler.Parser
 {
     public interface IEXODataParser
     {
-        APIResponse TryParse(string fileName, out EXODataSet data);
+        APIResponse TryParse(string fileName, out EXOParsedData data);
     }
 }

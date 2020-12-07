@@ -7,7 +7,7 @@ namespace EXODataHandler.Parser
 {
     public class EXODataParser : IEXODataParser
     {
-        public APIResponse TryParse(string fileName, out EXODataSet data)
+        public APIResponse TryParse(string fileName, out EXOParsedData data)
         {
             data = null;
 
@@ -34,7 +34,7 @@ namespace EXODataHandler.Parser
                     {
                         EXODataStructure structure = EXODataStructure.Parse(line);
 
-                        data = new EXODataSet(structure);
+                        data = new EXOParsedData(structure);
 
                         continue;
                     }

@@ -6,7 +6,7 @@ using System.Globalization;
 
 namespace EXODataHandler.Parser.Entities
 {
-    public class EXODataSet
+    public class EXOParsedData
     {
         public LinkedList<Planet> Planets { get; }
 
@@ -14,7 +14,7 @@ namespace EXODataHandler.Parser.Entities
 
         public EXODataStructure DataStructure { get; }
 
-        public EXODataSet(EXODataStructure structure)
+        public EXOParsedData(EXODataStructure structure)
         {
             Planets = new LinkedList<Planet>();
 

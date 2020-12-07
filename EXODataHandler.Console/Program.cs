@@ -12,7 +12,7 @@ namespace EXODataHandler.Console
         {
             IEXODataParser parser = new EXODataParser();
 
-            var result = parser.TryParse(args.Length > 0 ? args[0] : "dummycsv.csv", out EXODataSet data);
+            var result = parser.TryParse(args.Length > 0 ? args[0] : "dummycsv.csv", out EXOParsedData data);
 
             if (result.Success)
             {

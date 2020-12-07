@@ -80,5 +80,73 @@ namespace EXODataHandler.API
                 return new APIResponse<List<Star>>(false, null, e.Message);
             }
         }
+
+        public APIResponse<List<Planet>> OrderPlanets<T>(List<Planet> set,
+            OrderByType orderByType,
+            Func<Planet, T> keySelector, 
+            Func<Planet, T> secondaryKeySelector)
+        {
+            try
+            {
+                List<Planet> result;
+
+                if (orderByType == OrderByType.Ascending)
+                {
+                    if (secondaryKeySelector == null)
+                        result = set.OrderBy(keySelector).ToList();
+                    else
+                        result = set.OrderBy(keySelector)
+                            .ThenBy(secondaryKeySelector).ToList();
+                }
+                else
+                {
+                    if (secondaryKeySelector == null)
+                        result = set.OrderByDescending(keySelector).ToList();
+                    else
+                        result = set.OrderByDescending(keySelector)
+                            .ThenByDescending(secondaryKeySelector).ToList();
+                }
+
+                return new APIResponse<List<Planet>>(true, result);
+            }
+            catch (Exception e)
+            {
+                return new APIResponse<List<Planet>>(false, null, e.Message);
+            }
+        }
+
+        public APIResponse<List<Star>> OrderStars<T>(List<Star> set,
+            OrderByType orderByType,
+            Func<Star, T> keySelector,
+            Func<Star, T> secondaryKeySelector)
+        {
+            try
+            {
+                List<Star> result;
+
+                if (orderByType == OrderByType.Ascending)
+                {
+                    if (secondaryKeySelector == null)
+                        result = set.OrderBy(keySelector).ToList();
+                    else
+                        result = set.OrderBy(keySelector)
+                            .ThenBy(secondaryKeySelector).ToList();
+                }
+                else
+                {
+                    if (secondaryKeySelector == null)
+                        result = set.OrderByDescending(keySelector).ToList();
+                    else
+                        result = set.OrderByDescending(keySelector)
+                            .ThenByDescending(secondaryKeySelector).ToList();
+                }
+
+                return new APIResponse<List<Star>>(true, result);
+            }
+            catch (Exception e)
+            {
+                return new APIResponse<List<Star>>(false, null, e.Message);
+            }
+        }
     }
 }

@@ -22,24 +22,50 @@ namespace EXODataHandler.Console
 
             if (response.Success)
             {
-                // Example
                 APIResponse<List<Planet>> r =
-                    repo.GetPlanets(x => x.DiscoveryYear == 2020 && x.Name.Contains("Kepler"));
+                    repo.GetPlanets(x => x.DiscoveryYear > 2004 && x.Name.Contains("Kepler"));
 
-                SConsole.WriteLine($"DiscoveryYear == 2020 and Name contains Kepler");
+                SConsole.WriteLine("== Filters on entire data ==");
+                SConsole.WriteLine($"DiscoveryYear > 2004 and Name contains Kepler");
                 SConsole.WriteLine($"Found: {r.Result.Count}");
 
-                // Example
                 r = repo.GetPlanets(x => x.Host.Planets.Count > 5);
 
                 SConsole.WriteLine($"Stars with more than 5 planets");
                 SConsole.WriteLine($"Found: {r.Result.Count}");
 
-                // Example
                 r = repo.GetPlanets(x => x.Radius > 20f && x.Host.Mass > 2f);
 
-                SConsole.WriteLine($"Planet raius > 20 and Host mass > 2");
+                SConsole.WriteLine($"Planet radius > 20 and Host mass > 2");
                 SConsole.WriteLine($"Found: {r.Result.Count}");
+
+                r = repo.GetPlanets(x => x.DiscoveryYear > 2004 && x.Name.Contains("Kepler"));
+
+                SConsole.WriteLine("== Cumulative filtering ==");
+                SConsole.WriteLine($"DiscoveryYear > 2004 and Name contains Kepler");
+                SConsole.WriteLine($"Found: {r.Result.Count}");
+
+                r = repo.GetPlanets(x => x.Host.Planets.Count > 5, r.Result);
+
+                SConsole.WriteLine($"Stars with more than 5 planets");
+                SConsole.WriteLine($"Found: {r.Result.Count}");
+
+                r = repo.GetPlanets(x => x.Radius > 20f && x.Host.Mass > 2f, r.Result);
+
+                SConsole.WriteLine($"Planet radius > 20 and Host mass > 2");
+                SConsole.WriteLine($"Found: {r.Result.Count}");
+
+                APIResponse<List<Star>> s =
+                    repo.GetStars(x => x.Radius > 40);
+
+                SConsole.WriteLine($"Stars with radius > 40");
+                SConsole.WriteLine($"Found: {s.Result.Count}");
+                SConsole.WriteLine($"Stars planet count:");
+
+                for (int i = 0; i < s.Result.Count; i++)
+                {
+                    SConsole.WriteLine($"\tStar #{i}: {s.Result[i].Planets.Count} planets");
+                }
             }
             else
                 SConsole.WriteLine($"Error! {response.Message}");

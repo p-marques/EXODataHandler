@@ -41,17 +41,43 @@ namespace EXODataHandler.API
             return new APIResponse<EXODataSet>(parserResponse, result);
         }
 
-        public APIResponse<List<Planet>> GetPlanets(Func<Planet, bool> predicate)
+        public APIResponse<List<Planet>> GetPlanets(Func<Planet, bool> predicate,
+            List<Planet> set)
         {
             try
             {
-                List<Planet> result = planets.Where(predicate).ToList();
+                List<Planet> result;
+
+                if (set == null)
+                    result = planets.Where(predicate).ToList();
+                else
+                    result = set.Where(predicate).ToList();
 
                 return new APIResponse<List<Planet>>(true, result);
             }
             catch (Exception e)
             {
                 return new APIResponse<List<Planet>>(false, null, e.Message);
+            }
+        }
+
+        public APIResponse<List<Star>> GetStars(Func<Star, bool> predicate, 
+            List<Star> set)
+        {
+            try
+            {
+                List<Star> result;
+
+                if (set == null)
+                    result = stars.Where(predicate).ToList();
+                else
+                    result = set.Where(predicate).ToList();
+
+                return new APIResponse<List<Star>>(true, result);
+            }
+            catch (Exception e)
+            {
+                return new APIResponse<List<Star>>(false, null, e.Message);
             }
         }
     }

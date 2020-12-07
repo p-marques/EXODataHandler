@@ -9,6 +9,10 @@ namespace EXODataHandler.API
     {
         APIResponse<EXODataSet> ParseFile(string path);
 
-        APIResponse<List<Planet>> GetPlanets(Func<Planet, bool> predicate);
+        APIResponse<List<Planet>> GetPlanets(Func<Planet, bool> predicate, 
+            List<Planet> set = null);
+
+        APIResponse<List<Star>> GetStars(Func<Star, bool> predicate,
+            List<Star> set = null);
     }
 }

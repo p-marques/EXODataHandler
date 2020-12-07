@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EXODataHandler.API\EXODataHandler.API.csproj" />
     <ProjectReference Include="..\EXODataHandler.Core\EXODataHandler.Core.csproj" />
     <ProjectReference Include="..\EXODataHandler.Parser\EXODataHandler.Parser.csproj" />
   </ItemGroup>

@@ -1,7 +1,9 @@
-﻿using EXODataHandler.Core;
-using EXODataHandler.Parser;
-using EXODataHandler.Parser.Entities;
+﻿using EXODataHandler.API;
+using EXODataHandler.API.Entities;
+using EXODataHandler.Core;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using SConsole = System.Console;
 
 namespace EXODataHandler.Console
@@ -10,39 +12,37 @@ namespace EXODataHandler.Console
     {
         static void Main(string[] args)
         {
-            IEXODataParser parser = new EXODataParser();
+            IEXODataRepository repo = new EXODataRepository();
 
-            var result = parser.TryParse(args.Length > 0 ? args[0] : "dummycsv.csv", out EXOParsedData data);
+            string fileName = args.Length > 0 ? args[0] : "exodata.csv";
+            string path = Path.Combine(Environment
+                    .GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
 
-            if (result.Success)
+            APIResponse<EXODataSet> response = repo.ParseFile(path);
+
+            if (response.Success)
             {
-                LinkedListNode<Planet> node;
+                // Example
+                APIResponse<List<Planet>> r =
+                    repo.GetPlanets(x => x.DiscoveryYear == 2020 && x.Name.Contains("Kepler"));
 
-                for (node = data.Planets.First; node != null; node = node.Next)
-                {
-                    Planet p = node.Value;
+                SConsole.WriteLine($"DiscoveryYear == 2020 and Name contains Kepler");
+                SConsole.WriteLine($"Found: {r.Result.Count}");
 
-                    SConsole.WriteLine($"Planet: {p.Name}");
+                // Example
+                r = repo.GetPlanets(x => x.Host.Planets.Count > 5);
 
-                    SConsole.Write($"\tDiscovery Method: {p.DiscoveryMethod}, Discovery Year: {p.DiscoveryYear}, ");
+                SConsole.WriteLine($"Stars with more than 5 planets");
+                SConsole.WriteLine($"Found: {r.Result.Count}");
 
-                    SConsole.WriteLine($"Orbital Period: {p.OrbitalPeriod}, Radius: {p.PlanetRadius}, Mass: {p.PlanetMass}, Equilibrium Temperature: {p.EquilibriumTemperature}");
+                // Example
+                r = repo.GetPlanets(x => x.Radius > 20f && x.Host.Mass > 2f);
 
-                    SConsole.WriteLine($"Host: {p.Host.Name}");
-
-                    SConsole.Write($"\tEffective Temp: {p.Host.StellarEffectiveTemperature}, Radius: {p.Host.StellarRadius}, ");
-
-                    SConsole.WriteLine($"Mass: {p.Host.StellarMass}, Age: {p.Host.StellarAge}, Rotation Speed: {p.Host.StellarRotationSpeed}, Rotation Period: {p.Host.StellarRotationPeriod}, Distance To Sun: {p.Host.SunDistance}");
-
-                    SConsole.WriteLine("------");
-
-                }
-
+                SConsole.WriteLine($"Planet raius > 20 and Host mass > 2");
+                SConsole.WriteLine($"Found: {r.Result.Count}");
             }
             else
-                SConsole.WriteLine($"Error! {result.Message}");
+                SConsole.WriteLine($"Error! {response.Message}");
         }
-
-
     }
 }

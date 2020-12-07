@@ -7,15 +7,12 @@ namespace EXODataHandler.Parser
 {
     public class EXODataParser : IEXODataParser
     {
-        public APIResponse TryParse(string fileName, out EXOParsedData data)
+        public APIResponse TryParse(string path, out EXOParsedData data)
         {
             data = null;
 
             try
             {
-                string path = Path.Combine(Environment
-                    .GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
-
                 if (!path.EndsWith(".csv"))
                     throw new Exception("Wrong file format.\nExpecting .csv");
 

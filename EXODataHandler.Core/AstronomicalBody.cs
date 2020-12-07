@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System;
-
-namespace EXODataHandler.Core
+﻿namespace EXODataHandler.Core
 {
     public abstract class AstronomicalBody
     {
@@ -9,9 +6,7 @@ namespace EXODataHandler.Core
 
         public AstronomicalBody(string name)
         {
-
             Name = name;
-
         }
 
     }

@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="GlobalSuppressions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\EXODataHandler.Core\EXODataHandler.Core.csproj" />
   </ItemGroup>
 

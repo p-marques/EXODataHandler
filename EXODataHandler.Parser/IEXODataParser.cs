@@ -1,9 +1,10 @@
-﻿using EXODataHandler.Parser.Entities;
+﻿using EXODataHandler.Core;
+using EXODataHandler.Parser.Entities;
 
 namespace EXODataHandler.Parser
 {
     public interface IEXODataParser
     {
-        EXODataParserResult TryParse(string fileName, out EXODataSet data);
+        APIResponse TryParse(string path, out EXOParsedData data);
     }
 }

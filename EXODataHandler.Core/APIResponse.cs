@@ -1,12 +1,12 @@
-﻿namespace EXODataHandler.Parser.Entities
+﻿namespace EXODataHandler.Core
 {
-    public struct EXODataParserResult
+    public class APIResponse
     {
         public bool Success { get; }
 
         public string Message { get; }
 
-        public EXODataParserResult(bool success, string message = null)
+        public APIResponse(bool success, string message = null)
         {
             Success = success;
 

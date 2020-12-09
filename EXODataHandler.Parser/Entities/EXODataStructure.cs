@@ -1,38 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using EXODataHandler.Parser.Helpers;
 
 namespace EXODataHandler.Parser.Entities
 {
     public struct EXODataStructure
     {
-        private readonly string[] headers;
+        private readonly EXODataHeader[] headers;
 
-        public IReadOnlyList<string> Headers => Array.AsReadOnly(headers);
+        public IReadOnlyList<EXODataHeader> Headers => Array.AsReadOnly(headers);
 
-        public int PlanetNameIndex => FindHeaderIndex(Constants.PlanetNameHeader);
-
-        public int StarNameIndex => FindHeaderIndex(Constants.HostNameHeader);
-
-        public EXODataStructure(string[] inHeaders)
+        public EXODataStructure(EXODataHeader[] inHeaders)
         {
             headers = inHeaders;
         }
 
         public static EXODataStructure Parse(string headersLine)
         {
-            List<string> headers = new List<string>();
-            
+            List<EXODataHeader> headers = new List<EXODataHeader>();
+
             string[] headersInFile = headersLine.Split(',');
-            List<string> relevantHeaders = new List<string>(Constants.RelevantHeaders.Split(','));
 
-            for (int i = 0; i < headersInFile.Length; i++)
+            List<string> relevantHeaders = 
+                new List<string>(Constants.RelevantHeaders.Split(','));
+
+            for (short i = 0; i < headersInFile.Length; i++)
             {
-                string header = headersInFile[i].Trim();
+                EXODataHeader header = new EXODataHeader(headersInFile[i].Trim(), i);
 
-                if (string.IsNullOrEmpty(header))
+                if (string.IsNullOrEmpty(header.Id))
                     throw new Exception("Invalid column header.");
 
-                if (relevantHeaders.Contains(header))
+                
+                if (relevantHeaders.Contains(header.Id))
                 {
                     if (headers.Contains(header))
                         throw new Exception("Repeated columns.");
@@ -41,18 +41,18 @@ namespace EXODataHandler.Parser.Entities
                 }
             }
 
-            if (!headers.Contains(Constants.HostNameHeader) ||
-                !headers.Contains(Constants.PlanetNameHeader))
+            if (!headers.ContainsHeaderName(Constants.PlanetNameHeader) ||
+                !headers.ContainsHeaderName(Constants.HostNameHeader))
                 throw new Exception("Mandatory column missing.");
 
             return new EXODataStructure(headers.ToArray());
         }
 
-        private int FindHeaderIndex(string headerToFind)
+        public int FindHeaderIndex(string headerToFind)
         {
             for (int i = 0; i < headers.Length; i++)
             {
-                if (headerToFind == headers[i])
+                if (headerToFind == headers[i].Id)
                     return i;
             }
 

@@ -1,24 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Header : MonoBehaviour
 {
     [SerializeField]
     public GameObject linkedDataZone;
-    private GameObject LinkedDatazone { get => linkedDataZone; }
+    private GameObject LinkedDataZone { get => linkedDataZone; }
 
-    //maybe enum ?
-    private bool isSorted;
-    private void FlipData(GameObject DataZone)
+    private string[] input;
+
+    private GameObject inputField;
+    private TextMeshProUGUI inputFieldText;
+    private Header(GameObject linkeddatazone)
     {
-        //need to flip all data according to the on that was picked e.g. everything starts sorted by
-        // alphabetical order with planets, but i chose to sort by year of discovry i need to 
-        //grab each discovery years index and feed it to the rows
-        //1-  In short i must grab the column of the button that was pressed
-        //2-  Sort that column
-        //3-  feed its index to all the other rows
-        //this sounds very heavy >C
+        linkeddatazone = linkedDataZone;
+        inputField = gameObject.transform.GetChild(3).gameObject;
+        inputFieldText = gameObject.GetComponent<TextMeshProUGUI>();
 
+
+    }
+    public void Buttons()
+    {
+        for (int i = 0; i < 50; i++)
+        {
+            LinkedDataZone.transform.GetChild(0).SetSiblingIndex(49 - i);
+        }
     }
 }

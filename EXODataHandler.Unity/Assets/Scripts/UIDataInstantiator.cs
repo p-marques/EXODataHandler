@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-// This class is responsible for placing all the rows and columns of info
+// This class is responsible for placing all the headers and information on screen
 public class UIDataInstantiator : MonoBehaviour
 {
     private byte totalRows;
@@ -20,13 +20,16 @@ public class UIDataInstantiator : MonoBehaviour
     [SerializeField]
     private Header Header;
 
+    private Rows dataOnScreen;
+
     private  TextMeshProUGUI textComponent;
 
     //space between each column should be individual, and the colums transform should be at previousColumn.X + previousColumn.width
     //Column.width = longest object in column. (THIS INFORMATION MUST COME FROM DATACORE
     private void Start()
     {
-        maxChildren = 50;
+        dataOnScreen = gameObject.GetComponent<Rows>();
+        maxChildren = 100;
         totalRows = 8;
         SpawnHeaders(totalRows);
     } 
@@ -34,7 +37,6 @@ public class UIDataInstantiator : MonoBehaviour
     {
         for (int i = 0; i < totalRows; i++)
         {
-
             headerTransform = headerPrefab.GetComponent<RectTransform>();
             headerWidth = headerTransform.sizeDelta.x + 15;
 
@@ -42,6 +44,7 @@ public class UIDataInstantiator : MonoBehaviour
                 new Vector3(headerspot.transform.position.x + headerWidth * i,
                 headerspot.transform.position.y, headerspot.transform.position.z), Quaternion.identity);
             _header.transform.SetParent(headerspot.transform);
+
 
             //THIS CANT BE HERE FIND A FIX vvvvvv
             scalechange = new Vector3(2, 2, 0);
@@ -56,18 +59,19 @@ public class UIDataInstantiator : MonoBehaviour
         for (int i = 0; i < totalRows; i++)
         {
             GameObject _header = headerspot.transform.GetChild(i).gameObject;
+            Header header = _header.GetComponent<Header>();
             GameObject dataZoneSpawner = _header.transform.GetChild(4).gameObject;
             GameObject _dataZone = Instantiate(dataZone, new Vector3(dataZoneSpawner.transform.position.x, //this child is 
                 dataZoneSpawner.transform.position.y, dataZoneSpawner.transform.position.z), Quaternion.identity);
             _dataZone.transform.SetParent(gameObject.transform);
-            MakeDataAppearOnHeader(_dataZone);
+            header.linkedDataZone = _dataZone;
+            MakeDataAppear(_dataZone, i);
         }
     }
-    private void MakeDataAppearOnHeader(GameObject _dataZoneToFill)
+    private void MakeDataAppear(GameObject _dataZoneToFill, int i)
     {
-        for (int i = 0; i < maxChildren; i++)
+        for (int j = 0; j < maxChildren; j++)
         {
-            //checking trying to find more headers than there are
             GameObject _textchild = Instantiate(textPrefab, new Vector3(_dataZoneToFill.transform.position.x, //this child is 
                 _dataZoneToFill.transform.position.y, _dataZoneToFill.transform.position.z), Quaternion.identity); //meant to be instantiated inside the data zone of headerTofill
             _textchild.transform.SetParent(_dataZoneToFill.transform);
@@ -77,11 +81,9 @@ public class UIDataInstantiator : MonoBehaviour
             textComponent.text = $"{i}"; //Data goes here
         }
     }
-
-    //Another problem arises
-    //Headers must be parented on DataUI_vertical
-    //DataZones must be Content yet somehow linked to each header
-    //When DataZones are generated they get a property that links them to the Headers
-    //
+    //if you scroll past half ? 
+    // it instantiates more text where it left of... aka property
+    // also destroys the ones that are before so it should be the first 25 and load another 25
+    // 
 }
 

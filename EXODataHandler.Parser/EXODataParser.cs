@@ -16,27 +16,27 @@ namespace EXODataHandler.Parser
                 if (!path.EndsWith(".csv"))
                     throw new Exception("Wrong file format.\nExpecting .csv");
 
-                // With C# 8.0 we don't need the braces
-                using StreamReader sr = File.OpenText(path);
-
-                string line = null;
-
-                for (line = sr.ReadLine(); line != null; line = sr.ReadLine())
+                using(StreamReader sr = File.OpenText(path))
                 {
-                    line = line.Trim();
+                    string line = null;
 
-                    if (line.StartsWith('#') || string.IsNullOrEmpty(line))
-                        continue;
-                    else if (data == null)
+                    for (line = sr.ReadLine(); line != null; line = sr.ReadLine())
                     {
-                        EXODataStructure structure = EXODataStructure.Parse(line);
+                        line = line.Trim();
 
-                        data = new EXOParsedData(structure);
+                        if (line.StartsWith("#") || string.IsNullOrEmpty(line))
+                            continue;
+                        else if (data == null)
+                        {
+                            EXODataStructure structure = EXODataStructure.Parse(line);
 
-                        continue;
+                            data = new EXOParsedData(structure);
+
+                            continue;
+                        }
+
+                        data.AddPlanet(line);
                     }
-
-                    data.AddPlanet(line);
                 }
             }
             catch (FileNotFoundException)

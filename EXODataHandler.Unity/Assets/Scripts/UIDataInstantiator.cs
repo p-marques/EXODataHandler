@@ -16,6 +16,8 @@ public class UIDataInstantiator : MonoBehaviour
     private RectTransform headerTransform;
     private Vector3 scalechange;
 
+    private bool headersOn;
+
     private float headerWidth;
 
     private int screenX;
@@ -37,10 +39,18 @@ public class UIDataInstantiator : MonoBehaviour
     {
         maxChildren = 50;
         totalRows = 8;
-        SpawnHeaders(totalRows);
-    } 
-    public void SpawnHeaders(int totalRows)
+    }
+    private void Update()
     {
+        if (fileReader.ParseSucess == true && headersOn == false)
+        {
+            SpawnHeaders(8);
+
+        }
+    }
+    private void SpawnHeaders(int totalRows) //planet list, or star list
+    {
+        allData = fileReader.AllData;
         for (int i = 0; i < totalRows; i++)
         {
             headerTransform = headerPrefab.GetComponent<RectTransform>();
@@ -59,10 +69,11 @@ public class UIDataInstantiator : MonoBehaviour
             screenY = Screen.height;
 
             //----------------------------------
-
+            //print(allData);
             GameObject child = _header.transform.GetChild(2).gameObject;
             textComponent = child.GetComponent<TextMeshProUGUI>();
-            textComponent.text = "Nice"; //Name of parameter here
+            textComponent.text = allData.DataStructure.Headers[i].Id; //Name of parameter here
+
 
         }
         for (int i = 0; i < totalRows; i++)
@@ -76,8 +87,7 @@ public class UIDataInstantiator : MonoBehaviour
             header.LinkedDataZone = _dataZone;
             MakeDataAppear(_dataZone, i);
         }
-        allData = fileReader.AllData;
-        print(allData.PlanetCount);
+        headersOn = true;
     }
     private void MakeDataAppear(GameObject _dataZoneToFill, int i)
     {
@@ -89,7 +99,13 @@ public class UIDataInstantiator : MonoBehaviour
 
             //write in each text
             textComponent = _textchild.GetComponent<TextMeshProUGUI>();
-            textComponent.text = $"{i}"; //Data goes here
+            //switch case for j ?
+            textComponent.text = allData.Planets[i].Host.Name;
+            textComponent.text = allData.Planets[i].Name;
+            textComponent.text = allData.Planets[i].Mass.ToString();
+            textComponent.text = allData.Planets[i].EquilibriumTemperature.ToString();//Data goes here
+            textComponent.text = allData.Planets[i].DiscoveryMethod.ToString();//Data goes here
+            textComponent.text = allData.Planets[i].DiscoveryYear.ToString();//Data goes here
         }
     }
     //if you scroll past half ? 

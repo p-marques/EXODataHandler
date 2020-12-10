@@ -24,13 +24,15 @@ public class FilePathInput : MonoBehaviour
     IEXODataRepository repo;
     private void Start()
     {
-        input = gameObject.GetComponentInChildren<TextMeshProUGUI>();
         repo = new EXODataRepository();
     }
 
     public void ParseFile()
     {
-        fileName = input.text;
+        print("isparsing");
+        input = gameObject.GetComponentInChildren<TextMeshProUGUI>();
+        fileName = "Exodata.csv";
+
         path = Path.Combine(Environment
              .GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
         APIResponse<EXODataSet> response = repo.ParseFile(path);
@@ -38,12 +40,14 @@ public class FilePathInput : MonoBehaviour
         {
             allData = response.Result;
             parseSucess = true;
+            print(path);
         }
         else
         {
             //Message didnt work
+            print(path);
+            print(input.text);
+            print("noSucess");
         }    
-
-
     }
 }

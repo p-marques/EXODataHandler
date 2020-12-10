@@ -61,7 +61,7 @@ namespace EXODataHandler.Parser.Entities
                 //...and throws a Repeated Planet Exception 
                 throw new Exception("Repeated planet.");
 
-           
+
             Star thisPlanetStar = Stars.GetAstroByName(starName);
 
             //Checks if the planet's star doensn't exist....
@@ -108,7 +108,7 @@ namespace EXODataHandler.Parser.Entities
         /// <param name="header">Data Header</param>
         /// <param name="planet">Planet</param>
         /// <param name="values">Data Header information</param>
-        private void SetDataField(EXODataHeader header,Planet planet, string[] values)
+        private void SetDataField(EXODataHeader header, Planet planet, string[] values)
         {
             string value = values[header.PositionIndex].Trim();
 
@@ -122,12 +122,12 @@ namespace EXODataHandler.Parser.Entities
                 case Constants.DiscoveryMethod:
                     planet.DiscoveryMethod = value;
                     break;
-                case Constants.DiscoveryYear: 
-                    planet.DiscoveryYear = short.Parse(value, 
+                case Constants.DiscoveryYear:
+                    planet.DiscoveryYear = short.Parse(value,
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.OrbitalPeriod:
-                    planet.OrbitalPeriod = float.Parse(value, 
+                    planet.OrbitalPeriod = float.Parse(value,
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.PlanetRadius:
@@ -139,23 +139,23 @@ namespace EXODataHandler.Parser.Entities
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.EquilibriumTemperature:
-                    planet.EquilibriumTemperature = float.Parse(value, 
+                    planet.EquilibriumTemperature = float.Parse(value,
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarEffectiveTemperature:
-                    planet.Host.EffectiveTemperature = float.Parse(value, 
+                    planet.Host.EffectiveTemperature = float.Parse(value,
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarRadius:
-                    planet.Host.Radius = float.Parse(value, 
+                    planet.Host.Radius = float.Parse(value,
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarMass:
-                    planet.Host.Mass = float.Parse(value, 
+                    planet.Host.Mass = float.Parse(value,
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarAge:
-                    planet.Host.Age = float.Parse(value, 
+                    planet.Host.Age = float.Parse(value,
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarRotationSpeed:
@@ -163,11 +163,11 @@ namespace EXODataHandler.Parser.Entities
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.StellarRotationPeriod:
-                    planet.Host.RotationPeriod = float.Parse(value, 
+                    planet.Host.RotationPeriod = float.Parse(value,
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
                 case Constants.SunDistance:
-                    planet.Host.SunDistance = float.Parse(value, 
+                    planet.Host.SunDistance = float.Parse(value,
                                 NumberStyles.Any, CultureInfo.InvariantCulture);
                     break;
 

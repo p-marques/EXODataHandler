@@ -56,8 +56,8 @@ namespace EXODataHandler.Parser
                         //...and creates a new DataStructure
                         data = new EXOParsedData(structure);
 
-                            continue;
-                        }
+                        continue;
+                    }
 
                     //Adds a planet with all its information to the DataStructure
                     data.AddPlanet(line);
@@ -68,7 +68,7 @@ namespace EXODataHandler.Parser
             // respective error message
             catch (FileNotFoundException)
             {
-                
+
                 return new APIResponse(false, "No file found.");
             }
             catch (DirectoryNotFoundException)
@@ -80,7 +80,7 @@ namespace EXODataHandler.Parser
                 return new APIResponse(false, e.Message);
             }
 
-            
+
             return new APIResponse(true);
         }
     }

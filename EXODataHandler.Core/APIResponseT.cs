@@ -17,7 +17,7 @@
         /// <param name="success"> Result from the TryParse method</param>
         /// <param name="result">Result object of the API call</param>
         /// <param name="message">Error message in case the Parsing fails</param>
-        public APIResponse(bool success, T result, string message = null) 
+        public APIResponse(bool success, T result, string message = null)
             : base(success, message)
         {
             Result = result;

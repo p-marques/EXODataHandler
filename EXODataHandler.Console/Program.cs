@@ -112,7 +112,7 @@ namespace EXODataHandler.Console
                     SConsole.WriteLine($"Name: {p.Name}, DiscMethod: {p.DiscoveryMethod}");
                 }
 
-                APIResponse<List<Planet>> p1 = repo.OrderPlanets(a.Result, 
+                APIResponse<List<Planet>> p1 = repo.OrderPlanets(a.Result,
                     OrderByType.Descending, x => x.DiscoveryMethod, z => z.Name);
 
                 SConsole.WriteLine("\n>>> ORDERED WITH SECONDARY KEY (NAME)");

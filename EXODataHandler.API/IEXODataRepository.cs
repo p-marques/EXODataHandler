@@ -25,7 +25,7 @@ namespace EXODataHandler.API
         /// criteria and determines object match</param>
         /// <param name="set">Optional list of planets to use as dataset</param>
         /// <returns> List of Planets that match the criterial</returns>
-        APIResponse<List<Planet>> GetPlanets(Func<Planet, bool> predicate, 
+        APIResponse<List<Planet>> GetPlanets(Func<Planet, bool> predicate,
             List<Planet> set = null);
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace EXODataHandler.API
         /// <returns>List of Planets in the desired order</returns>
         APIResponse<List<Planet>> OrderPlanets<T>(List<Planet> set,
             OrderByType orderByType,
-            Func<Planet, T> keySelector, 
+            Func<Planet, T> keySelector,
             Func<Planet, T> secondaryKeySelector = null);
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace EXODataHandler.API
         /// <returns>List of Stars in the desired order</returns>
         APIResponse<List<Star>> OrderStars<T>(List<Star> set,
             OrderByType orderByType,
-            Func<Star, T> keySelector, 
+            Func<Star, T> keySelector,
             Func<Star, T> secondaryKeySelector = null);
     }
 }

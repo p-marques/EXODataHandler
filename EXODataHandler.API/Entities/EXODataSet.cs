@@ -44,7 +44,7 @@ namespace EXODataHandler.API.Entities
         /// and their respective information </param>
         /// <param name="stars">List of Stars with all stars in the file
         /// and their respective information</param>
-        public EXODataSet(EXODataStructure dataStructure, List<Planet> planets, 
+        public EXODataSet(EXODataStructure dataStructure, List<Planet> planets,
             List<Star> stars)
         {
 

@@ -110,7 +110,7 @@ namespace EXODataHandler.API
         /// criteria and determines object match</param>
         /// <param name="set">Optional list of stars to use as dataset</param>
         /// <returns> List of Stars that match the criteria</returns>
-        public APIResponse<List<Star>> GetStars(Func<Star, bool> predicate, 
+        public APIResponse<List<Star>> GetStars(Func<Star, bool> predicate,
             List<Star> set)
         {
             //Trys to find a list with the desired criteria...
@@ -147,7 +147,7 @@ namespace EXODataHandler.API
         /// <returns>List of Planets in the desired order</returns>
         public APIResponse<List<Planet>> OrderPlanets<T>(List<Planet> set,
             OrderByType orderByType,
-            Func<Planet, T> keySelector, 
+            Func<Planet, T> keySelector,
             Func<Planet, T> secondaryKeySelector)
         {
             //Trys to find a list with the desired criteria...

@@ -1,6 +1,6 @@
 ﻿using EXODataHandler.Core;
-using System.Collections.Generic;
 using EXODataHandler.Parser.Entities;
+using System.Collections.Generic;
 
 namespace EXODataHandler.Parser.Helpers
 {
@@ -46,6 +46,6 @@ namespace EXODataHandler.Parser.Helpers
 
             return false;
         }
-    
+
     }
 }

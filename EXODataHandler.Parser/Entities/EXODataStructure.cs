@@ -1,6 +1,6 @@
-﻿using System;
+﻿using EXODataHandler.Parser.Helpers;
+using System;
 using System.Collections.Generic;
-using EXODataHandler.Parser.Helpers;
 
 namespace EXODataHandler.Parser.Entities
 {
@@ -42,7 +42,7 @@ namespace EXODataHandler.Parser.Entities
             string[] headersInFile = headersLine.Split(',');
 
             //Creates a new List with all the Relevant Headers
-            List<string> relevantHeaders = 
+            List<string> relevantHeaders =
                 new List<string>(Constants.RelevantHeaders.Split(','));
 
             //Cycle that adds a valid header to the EXODataHeaders list

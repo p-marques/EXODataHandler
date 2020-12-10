@@ -8,33 +8,62 @@ using System.Linq;
 
 namespace EXODataHandler.API
 {
+    /// <summary>
+    /// Class that creates the API actions. Implements IEXODataRepository
+    /// </summary>
     public class EXODataRepository : IEXODataRepository
     {
+        /// <summary>
+        /// IEXODataParser variable to validate file
+        /// </summary>
         private readonly IEXODataParser parser;
 
+        /// <summary>
+        /// List of Planets
+        /// </summary>
         private List<Planet> planets;
 
+        /// <summary>
+        /// List of Stars
+        /// </summary>
         private List<Star> stars;
 
+        /// <summary>
+        /// Constroctor for EXODataRepository class
+        /// </summary>
         public EXODataRepository()
         {
             parser = new EXODataParser();
         }
 
+
+        /// <summary>
+        /// Method used to create a DataSet with User's File path
+        /// </summary>
+        /// <param name="path">File's Path</param>
+        /// <returns>Returns an APIResponse of Type EXODataSet</returns>
         public APIResponse<EXODataSet> ParseFile(string path)
         {
             EXODataSet result;
+
+            //Validates the User's file
             APIResponse parserResponse = parser.TryParse(path, out EXOParsedData data);
 
+            //Checks if the file validation was sucessfull...
             if (!parserResponse.Success)
             {
+                //...if it wasn't Returns an APIResponse of Type EXODataSet
+                //with respective error message
                 return new APIResponse<EXODataSet>(parserResponse, null);
             }
 
+            //Converts Planets in data into a List
             planets = data.Planets.ToList();
 
+            //Converts Stars in data into a List
             stars = data.Stars.ToList();
 
+            //Creates a new DataSet with the List of Planets and Stars
             result = new EXODataSet(data.DataStructure, new List<Planet>(planets),
                 new List<Star>(stars));
 

@@ -1,5 +1,9 @@
 ﻿namespace EXODataHandler.Core
 {
+    /// <summary>
+    /// Class that saves all the information regarding Planets.
+    /// Extends Astronomical Body;
+    /// </summary>
     public class Planet : AstronomicalBody
     {
         public string DiscoveryMethod { get; set; }

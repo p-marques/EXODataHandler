@@ -29,7 +29,6 @@ public class FilePathInput : MonoBehaviour
     private void Start()
     {
         menu1 = gameObject;
-
         repo = new EXODataRepository();
     }
 

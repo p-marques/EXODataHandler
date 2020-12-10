@@ -366,7 +366,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0.0000013411045, y: 0}
-  m_SizeDelta: {x: 3000, y: 300}
+  m_SizeDelta: {x: 1000, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &201226054
 GameObject:
@@ -402,7 +402,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0.0003240788, y: 0.000030517578}
-  m_SizeDelta: {x: 0, y: 1000}
+  m_SizeDelta: {x: 0, y: 10000}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &239576038
 GameObject:
@@ -643,7 +643,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2089493653}
   m_HandleRect: {fileID: 2089493652}
   m_Direction: 2
-  m_Value: 0.99999994
+  m_Value: 1
   m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1106,7 +1106,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 68477800}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.3902439
+  m_Size: 0.65753424
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2106,7 +2106,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 24.3, y: -10.1}
+  m_AnchoredPosition: {x: 15.5, y: 3}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1101696586
@@ -2118,9 +2118,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1101696587}
-  - component: {fileID: 1101696589}
   - component: {fileID: 1101696588}
-  - component: {fileID: 1101696590}
   m_Layer: 5
   m_Name: Instantiator
   m_TagString: Untagged
@@ -2144,7 +2142,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 30.7, y: 532.8}
+  m_AnchoredPosition: {x: 108.2, y: 5075.8}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1101696588
@@ -2159,50 +2157,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db3eb3b5f42dfd64cad45d9e24e94939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  programState: 0
   fileReader: {fileID: 2144561924}
   textPrefab: {fileID: 9214657157237151757, guid: 70d9f6b5ad454634aae2c518c9862473, type: 3}
   headerPrefab: {fileID: 1672213002762360678, guid: 4dc4e1964fe9e7f45b056736f6580068, type: 3}
   headerspot: {fileID: 1055548697}
   dataZone: {fileID: 8558600616802887152, guid: 55303fe3cf251ab4388cc7ce077eec46, type: 3}
   Header: {fileID: 0}
---- !u!114 &1101696589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1101696586}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_Spacing: -85
-  m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
---- !u!114 &1101696590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1101696586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0b0b01d8ff6d6e43a541900b14287eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1108183684
 GameObject:
   m_ObjectHideFlags: 0
@@ -2757,7 +2718,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2437, y: -1}
+  m_AnchoredPosition: {x: -1421, y: -1}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1229278126
@@ -3135,7 +3096,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1340666449
 Transform:
   m_ObjectHideFlags: 0
@@ -3391,7 +3352,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1101696588}
         m_TargetAssemblyTypeName: UIDataInstantiator, Assembly-CSharp
         m_MethodName: SpawnHeaders
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4768,7 +4729,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1101696588}
         m_TargetAssemblyTypeName: UIDataInstantiator, Assembly-CSharp
         m_MethodName: SpawnHeaders
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5193,4 +5154,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 0}
   menu1: {fileID: 0}
-  menu2: {fileID: 0}
+  menu2: {fileID: 1340666448}

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Rows : MonoBehaviour
 {
-    public GameObject[] dataRow;
+    private GameObject[] dataRow;
 
-    private GameObject[] DataRow { get => dataRow; }
+    public GameObject[] DataRow { get => dataRow; }
 
     private GameObject[] arrayOfRows;
 

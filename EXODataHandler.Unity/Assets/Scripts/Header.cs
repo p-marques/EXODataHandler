@@ -6,10 +6,10 @@ using TMPro;
 public class Header : MonoBehaviour
 {
     [SerializeField]
-    public GameObject linkedDataZone;
-    private GameObject LinkedDataZone { get => linkedDataZone; }
+    private GameObject linkedDataZone;
+    public GameObject LinkedDataZone { get => linkedDataZone; set => linkedDataZone = value; }
 
-    private string[] input;
+private string[] input;
 
     private GameObject inputField;
     private TextMeshProUGUI inputFieldText;
@@ -17,7 +17,7 @@ public class Header : MonoBehaviour
     {
         linkeddatazone = linkedDataZone;
         inputField = gameObject.transform.GetChild(3).gameObject;
-        inputFieldText = gameObject.GetComponent<TextMeshProUGUI>();
+        inputFieldText = gameObject.GetComponentInChildren<TextMeshProUGUI>();
 
 
     }

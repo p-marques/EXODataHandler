@@ -30,37 +30,38 @@ namespace EXODataHandler.Parser
                     throw new Exception("Wrong file format.\nExpecting .csv");
 
                 // With C# 8.0 we don't need the braces
-                using StreamReader sr = File.OpenText(path);
-
-                string line = null;
-
-                //Reads lines that arent null in the file
-                for (line = sr.ReadLine(); line != null; line = sr.ReadLine())
+                using (StreamReader sr = File.OpenText(path))
                 {
-                    //Removes all white spaces from read line
-                    line = line.Trim();
+                    string line = null;
 
-                    //Checks if the line starts with the "#" character
-                    //or if its empty....
-                    if (line.StartsWith('#') || string.IsNullOrEmpty(line))
-                        //...if so it ignores them
-                        continue;
-
-                    //Checks if the current Data is empty...
-                    else if (data == null)
+                    //Reads lines that arent null in the file
+                    for (line = sr.ReadLine(); line != null; line = sr.ReadLine())
                     {
-                        //...creates a new structure with the correct lines...
-                        EXODataStructure structure = EXODataStructure.Parse(line);
+                        //Removes all white spaces from read line
+                        line = line.Trim();
+
+                        //Checks if the line starts with the "#" character
+                        //or if its empty....
+                        if (line.StartsWith("#") || string.IsNullOrEmpty(line))
+                            //...if so it ignores them
+                            continue;
+
+                        //Checks if the current Data is empty...
+                        else if (data == null)
+                        {
+                            //...creates a new structure with the correct lines...
+                            EXODataStructure structure = EXODataStructure.Parse(line);
 
 
-                        //...and creates a new DataStructure
-                        data = new EXOParsedData(structure);
+                            //...and creates a new DataStructure
+                            data = new EXOParsedData(structure);
 
-                        continue;
+                            continue;
+                        }
+
+                        //Adds a planet with all its information to the DataStructure
+                        data.AddPlanet(line);
                     }
-
-                    //Adds a planet with all its information to the DataStructure
-                    data.AddPlanet(line);
                 }
             }
 

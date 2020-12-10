@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "EXODataHandler.Console": {
-      "commandName": "Project",
-      "commandLineArgs": "exodata.csv"
-    }
-  }
-}

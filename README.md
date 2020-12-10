@@ -115,7 +115,7 @@ References: EXODataHandler.Core, EXODataHandler.Parser and EXODataHandler.API
 
 ### UML Diagram
 
-![uml](images/uml.png "UML Diagram")
+![uml](images/uml.jpg "UML Diagram")
 
 **Figura 1** - UML Diagram. Made with [Draw.io](https://www.draw.io/).
 

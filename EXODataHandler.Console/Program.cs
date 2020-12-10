@@ -22,7 +22,7 @@ namespace EXODataHandler.Console
 
             if (response.Success)
             {
-                //APIResponse<List<Planet>> r =
+                /*//APIResponse<List<Planet>> r =
                 //    repo.GetPlanets(x => x.DiscoveryYear > 2004 && x.Name.Contains("Kepler"));
 
                 //SConsole.WriteLine("== Filters on entire data ==");
@@ -88,7 +88,7 @@ namespace EXODataHandler.Console
                 //    Star a = ordered.Result[i];
 
                 //    SConsole.WriteLine($"Name: {a.Name}, Age: {a.Age}");
-                //}
+                //}*/
 
                 APIResponse<List<Planet>> a = repo.GetPlanets(x => x.EquilibriumTemperature > 2500);
                 SConsole.WriteLine($"Found: {a.Result.Count}");

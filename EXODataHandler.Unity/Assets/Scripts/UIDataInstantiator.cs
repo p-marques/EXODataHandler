@@ -13,6 +13,9 @@ public class UIDataInstantiator : MonoBehaviour
     // maxChildren will have to be set according to the amount of paramaters given by the file
     private ushort maxChildren;
 
+    [SerializeField]
+    private ProgramStateEnum programState;
+
     private RectTransform headerTransform;
     private Vector3 scalechange;
 
@@ -35,6 +38,7 @@ public class UIDataInstantiator : MonoBehaviour
 
     private  TextMeshProUGUI textComponent;
 
+    private string typeOfData;
     private void Start()
     {
         maxChildren = 50;
@@ -42,13 +46,8 @@ public class UIDataInstantiator : MonoBehaviour
     }
     private void Update()
     {
-        if (fileReader.ParseSucess == true && headersOn == false)
-        {
-            SpawnHeaders(8);
-
-        }
     }
-    private void SpawnHeaders(int totalRows) //planet list, or star list
+    public void SpawnHeaders(int totalRows) //planet list, or star list?
     {
         allData = fileReader.AllData;
         for (int i = 0; i < totalRows; i++)
@@ -72,7 +71,23 @@ public class UIDataInstantiator : MonoBehaviour
             //print(allData);
             GameObject child = _header.transform.GetChild(2).gameObject;
             textComponent = child.GetComponent<TextMeshProUGUI>();
-            textComponent.text = allData.DataStructure.Headers[i].Id; //Name of parameter here
+
+
+            for (int z = 0; z < allData.DataStructure.Headers.Count; z++)
+            {
+                print(allData.DataStructure.Headers[z].Id);
+            }
+
+            if (totalRows == 8)
+            {
+                textComponent.text = allData.DataStructure.Headers[i].Id; //Name of parameter here
+                typeOfData = "planets";
+            }
+            else
+            {
+                textComponent.text = allData.DataStructure.Headers[i+7].Id;
+                typeOfData = "stars";
+            }
 
 
         }
@@ -81,15 +96,15 @@ public class UIDataInstantiator : MonoBehaviour
             GameObject _header = headerspot.transform.GetChild(i).gameObject;
             Header header = _header.GetComponent<Header>();
             GameObject dataZoneSpawner = _header.transform.GetChild(4).gameObject;
-            GameObject _dataZone = Instantiate(dataZone, new Vector3(dataZoneSpawner.transform.position.x, //this child is 
+            GameObject _dataZone = Instantiate(dataZone, new Vector3(dataZoneSpawner.transform.position.x +19, //this child is 
                 dataZoneSpawner.transform.position.y, dataZoneSpawner.transform.position.z), Quaternion.identity);
             _dataZone.transform.SetParent(gameObject.transform);
             header.LinkedDataZone = _dataZone;
-            MakeDataAppear(_dataZone, i);
+            MakeDataAppear(_dataZone, i, typeOfData);
         }
         headersOn = true;
     }
-    private void MakeDataAppear(GameObject _dataZoneToFill, int i)
+    private void MakeDataAppear(GameObject _dataZoneToFill, int i, string nameOfData) 
     {
         for (int j = 0; j < maxChildren; j++)
         {
@@ -99,18 +114,73 @@ public class UIDataInstantiator : MonoBehaviour
 
             //write in each text
             textComponent = _textchild.GetComponent<TextMeshProUGUI>();
-            //switch case for j ?
-            textComponent.text = allData.Planets[i].Host.Name;
-            textComponent.text = allData.Planets[i].Name;
-            textComponent.text = allData.Planets[i].Mass.ToString();
-            textComponent.text = allData.Planets[i].EquilibriumTemperature.ToString();//Data goes here
-            textComponent.text = allData.Planets[i].DiscoveryMethod.ToString();//Data goes here
-            textComponent.text = allData.Planets[i].DiscoveryYear.ToString();//Data goes here
+            if (nameOfData == "planets")
+            {
+                switch (i)
+                {
+                    case 0:
+                        textComponent.text = allData.Planets[j].Name;
+                        break;
+                    case 1:
+                        textComponent.text = allData.Planets[j].Host.Name;
+                        break;
+                    case 2:
+                        textComponent.text = allData.Planets[j].DiscoveryMethod.ToString();
+                        break;
+                    case 3:
+                        textComponent.text = allData.Planets[j].DiscoveryYear.ToString();
+                        break;
+                    case 4:
+                        textComponent.text = allData.Planets[j].Mass.ToString();
+                        break;
+                    case 5:
+                        textComponent.text = allData.Planets[j].EquilibriumTemperature.ToString();
+                        break;
+                    case 6:
+                        textComponent.text = allData.Planets[j].OrbitalPeriod.ToString();
+                        break;
+                    case 7:
+                        textComponent.text = allData.Planets[j].Radius.ToString();
+                        break;
+                }  
+            }
+            else
+            {
+                switch (i)
+                {
+                    case 0:
+                        textComponent.text = allData.Stars[j].Name;
+                        break;
+                    case 1:
+                        textComponent.text = allData.Stars[j].SunDistance.ToString();
+                        break;
+                    case 2:
+                        textComponent.text = allData.Stars[j].RotationPeriod.ToString();
+                        break;
+                    case 3:
+                        textComponent.text = allData.Stars[j].Age.ToString();
+                        break;
+                    case 4:
+                        textComponent.text = allData.Stars[j].Radius.ToString();
+                        break;
+                    case 5:
+                        textComponent.text = allData.Stars[j].Mass.ToString();
+                        break;
+                    case 6:
+                        textComponent.text = allData.Stars[j].RotationSpeed.ToString();
+                        break;
+                }
+            }
         }
     }
+    /*
+     * 
+     * 
+     * 
+     * 
     //if you scroll past half ? 
     // it instantiates more text where it left of... aka property
     // also destroys the ones that are before so it should be the first 25 and load another 25
-    // 
+    // */
 }
 

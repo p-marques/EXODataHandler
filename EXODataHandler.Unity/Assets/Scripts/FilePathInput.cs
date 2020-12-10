@@ -6,11 +6,15 @@ using EXODataHandler.API;
 using EXODataHandler.API.Entities;
 using EXODataHandler.Core;
 using TMPro;
+using System.Text;
 
 public class FilePathInput : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI input;
+
+    [SerializeField]
+    private GameObject menu1, menu2;
 
     string fileName;
     string path;
@@ -24,29 +28,42 @@ public class FilePathInput : MonoBehaviour
     IEXODataRepository repo;
     private void Start()
     {
+        menu1 = gameObject;
+
         repo = new EXODataRepository();
     }
 
     public void ParseFile()
     {
+        Encoding aSCII = Encoding.ASCII;
+        Encoding uNICODE = Encoding.Unicode;
+        
         print("isparsing");
         input = gameObject.GetComponentInChildren<TextMeshProUGUI>();
-        fileName = "Exodata.csv";
+        //fileName = "Exodata.csv";
+        fileName = input.text;
+
+
+        //TextMeshPro hack, adding random character at end of string
+        if (!fileName.EndsWith(".csv"))
+            fileName = fileName.Remove(fileName.Length - 1);
 
         path = Path.Combine(Environment
              .GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
         APIResponse<EXODataSet> response = repo.ParseFile(path);
+
+
         if (response.Success)
         {
             allData = response.Result;
             parseSucess = true;
-            print(path);
+            menu1.SetActive(false);
+            menu2.SetActive(true);
         }
         else
         {
-            //Message didnt work
-            print(path);
-            print(input.text);
+
+            print(response.Message);
             print("noSucess");
         }    
     }
